@@ -1,5 +1,4 @@
-
-public class Messages {
+public class Utility {
     public static final String KEY = "6fbf572aae07c153af99cb7c";
 
     public static String getUrl(String coin) {
