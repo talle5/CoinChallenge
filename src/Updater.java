@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Updater {
     private Map<String, Double> cache;
+    private final String KEY = "6fbf572aae07c153af99cb7c";
 
     public Updater() {
         new Thread(this::reload).start();
@@ -21,7 +22,7 @@ public class Updater {
     }
 
     private Map<String, Double> request() {
-        var request = new Request(Utility.getUrl());
+        var request = new Request(getUrl());
         var u = JsonParser.parseString(request.getResponse()).getAsJsonObject().getAsJsonObject("conversion_rates");
         try {
             Type a = new TypeToken<Map<String, String>>(){}.getType();
@@ -29,5 +30,9 @@ public class Updater {
         } catch (Exception e) {
             return null;
         }
+    }
+
+    private String getUrl() {
+        return "https://v6.exchangerate-api.com/v6/" + KEY + "/latest/USD";
     }
 }
