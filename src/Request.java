@@ -8,16 +8,16 @@ public class Request {
     private final HttpClient client;
     private final HttpRequest hrequest;
 
-    public Request (String url) {
+    public Request(String url) {
         client = HttpClient.newHttpClient();
-        hrequest = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .build();
+        hrequest = HttpRequest.newBuilder(URI.create(url)).build();
     }
 
-    public String getResponse() throws IOException, InterruptedException {
-        return client.send(hrequest, HttpResponse.BodyHandlers.ofString()).body();
+    public String getResponse() {
+        try {
+            return client.send(hrequest, HttpResponse.BodyHandlers.ofString()).body();
+        } catch (IOException | InterruptedException e) {
+            throw new RuntimeException(e);
+        }
     }
-
-
 }
