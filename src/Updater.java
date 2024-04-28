@@ -1,27 +1,32 @@
 import com.google.gson.Gson;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.Map;
 
 public class Updater {
-    private Map<String, Double> map;
+    private Map<String, Double> cache;
 
-    Updater() {
+    public Updater() {
         new Thread(this::reload).start();
     }
 
-    void reload() {
-        this.map = request();
+    public void reload() {
+        this.cache = request();
     }
 
-    public Map<String, Double> getMap() {
-        return map;
+    public Map<String, Double> getCache() {
+        return cache;
     }
 
     private Map<String, Double> request() {
-        var request = new Request(Messages.getUrl("USD"));
+        var request = new Request(Utility.getUrl());
+        var u = JsonParser.parseString(request.getResponse()).getAsJsonObject().getAsJsonObject("conversion_rates");
         try {
-            return new Gson().fromJson(request.getResponse(), rates.class).conversion_rates();
-        } catch (Throwable e) {
+            Type a = new TypeToken<Map<String, String>>(){}.getType();
+            return new Gson().fromJson(u, a);
+        } catch (Exception e) {
             return null;
         }
     }
