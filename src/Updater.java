@@ -14,7 +14,7 @@ public class Updater {
     private static final String KEY = "6fbf572aae07c153af99cb7c";
 
     public Updater() {
-        new Thread(this::reload).start();
+        reload();
     }
 
     public void reload() {
