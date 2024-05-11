@@ -2,7 +2,6 @@ import com.google.gson.Gson;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
@@ -30,13 +29,12 @@ public class Updater {
         var request = HttpRequest.newBuilder(getUrl()).build();
         try {
             var resposta = client.send(request, HttpResponse.BodyHandlers.ofString()).body();
-            var u = JsonParser.parseString(resposta)
+            var valores = JsonParser.parseString(resposta)
                     .getAsJsonObject().
                     getAsJsonObject("conversion_rates");
-            Type a = new TypeToken<Map<String, Double>>(){}.getType();
-            return new Gson().fromJson(u, a);
+            return new Gson().fromJson(valores, new TypeToken<Map<String, Double>>(){}.getType());
         } catch (Exception e) {
-            return null;
+            throw new RuntimeException(e);
         }
     }
 
