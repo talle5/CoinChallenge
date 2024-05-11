@@ -22,8 +22,7 @@ public class Shell implements IConsoleApplication {
     public void run() {
         var consoleInput = new Scanner(System.in);
         var running = true;
-        var cacheUpdater = new Updater();
-        Map<String, Double> cache = cacheUpdater.getCache();
+        Map<String, Double> cache = new Updater().getCache();
         System.out.println(HELP);
         while (running) {
             try {
