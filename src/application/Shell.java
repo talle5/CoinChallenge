@@ -36,6 +36,8 @@ public class Shell implements IConsoleApplication {
                     case "" -> System.out.println();
                     default -> throw new Exception("Comando invalido! Para ajuda digite help.");
                 }
+            } catch (NumberFormatException e) {
+                System.out.println(COLOR_RED + "swap: Digite um numero!");
             } catch (Exception e) {
                 System.out.println(COLOR_RED + e.getMessage());
             }
