@@ -9,7 +9,7 @@ public class Menu implements IConsoleApplication {
         var swapper = new Swapper();
         var choice = consoleInput.nextInt();
         if (choice == 7 ) {
-            new Shell().run();
+            (new Shell()).run();
             return;
         }
         System.out.println();

@@ -36,7 +36,7 @@ public class Updater {
             var valores = JsonParser.parseString(resposta)
                     .getAsJsonObject().
                     getAsJsonObject("conversion_rates");
-            return new Gson().fromJson(valores, new TypeToken<Map<String, Double>>(){}.getType());
+            return (new Gson()).fromJson(valores, (new TypeToken<Map<String, Double>>(){}).getType());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
