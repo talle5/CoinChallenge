@@ -8,6 +8,10 @@ public class Menu implements IConsoleApplication {
         var consoleInput = new Scanner(System.in);
         var swapper = new Swapper();
         var choice = consoleInput.nextInt();
+        if (choice == 7 ) {
+            new Shell().run();
+            return;
+        }
         System.out.println();
         var valor = consoleInput.nextDouble();
         switch (choice) {

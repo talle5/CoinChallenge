@@ -10,7 +10,6 @@ public class Shell implements IConsoleApplication {
     private static final String RED = "\u001B[31m";
 
     private static final String HELP = """
-            Bem-Vimdo ao comvesor de moedas!
             Para comverter suar moedas, digite: "swap [primeira moeda] [segunda moeda] [valor]".
             Exemplo: swap USD BRL 10.
                        \s
