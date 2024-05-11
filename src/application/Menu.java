@@ -4,15 +4,28 @@ import services.Swapper;
 import java.util.Scanner;
 
 public class Menu implements IConsoleApplication {
+    private static final String WELCOME_MESSAGE = """
+            Seja bem-vindo/a ao Conversor de Moeda =]
+            1) Real brasileiro =>> Dólar
+            2) Real brasileiro =>> Peso boliviano
+            3) Real brasileiro =>> Peso argentino
+            4) Dólar =>> Real brasileiro
+            5) Peso boliviano =>> Real brasileiro
+            6) Peso argentino =>> Real brasileiro
+            7) Modo Shell
+            8) Sair
+            Escolha uma opção válida:""";
+
     public void run() {
         var consoleInput = new Scanner(System.in);
         var swapper = new Swapper();
+        System.out.println(WELCOME_MESSAGE);
         var choice = consoleInput.nextInt();
         if (choice == 7 ) {
             (new Shell()).run();
             return;
         }
-        System.out.println();
+        System.out.println("Digite o valor que deseja comverter:");
         var valor = consoleInput.nextDouble();
         switch (choice) {
             case 1 -> {
