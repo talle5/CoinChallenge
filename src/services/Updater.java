@@ -11,15 +11,17 @@ import java.net.http.HttpResponse;
 import java.util.Map;
 
 public class Updater {
-    private Map<String, Double> cache;
+    private static Map<String, Double> cache;
     private static final String KEY = "6fbf572aae07c153af99cb7c";
 
     public Updater() {
-        reload();
+        if (cache == null) {
+            reload();
+        }
     }
 
     public void reload() {
-        this.cache = request();
+        cache = request();
     }
 
     public Map<String, Double> getCache() {
