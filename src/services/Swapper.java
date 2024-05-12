@@ -4,11 +4,11 @@ import java.util.Map;
 
 public class Swapper {
 
-    private Updater cacheUpdater;
+    private CacheManager cacheUpdater;
     private Map<String, Double> cache;
 
     public Swapper() {
-        cacheUpdater = new Updater();
+        cacheUpdater = new CacheManager();
         cache = cacheUpdater.getCache();
     }
 

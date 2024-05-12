@@ -1,6 +1,6 @@
 package application;
 
-import services.Updater;
+import services.CacheManager;
 
 import java.util.Scanner;
 
@@ -13,7 +13,7 @@ public class Shell implements IConsoleApplication {
     public void run() {
         var consoleInput = new Scanner(System.in);
         var running = true;
-        var cache = (new Updater()).getCache();
+        var cache = (new CacheManager()).getCache();
         System.out.println(HELP_MESSAGE);
         while (running) {
             try {
