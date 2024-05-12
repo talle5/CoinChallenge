@@ -1,6 +1,7 @@
 package application;
 
 import services.Swapper;
+
 import java.util.Scanner;
 
 public class Menu implements IConsoleApplication {
@@ -52,6 +53,7 @@ public class Menu implements IConsoleApplication {
                             System.out.printf("%2.2f Pesos Argentinos valem %2.2f Reais\n", valor, resultado);
                         }
                     }
+                    System.out.println();
                 } else {
                     System.out.println("Digite um numero!");
                 }
