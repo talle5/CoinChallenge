@@ -1,4 +1,4 @@
-package services;
+package com.challenge.services;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonParser;

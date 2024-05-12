@@ -1,6 +1,6 @@
-package application;
+package com.challenge.application;
 
-import services.CacheManager;
+import com.challenge.services.CacheManager;
 
 import java.util.Scanner;
 

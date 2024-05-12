@@ -1,4 +1,4 @@
-package services;
+package com.challenge.services;
 
 import java.util.Map;
 

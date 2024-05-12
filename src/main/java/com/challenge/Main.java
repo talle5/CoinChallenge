@@ -1,4 +1,6 @@
-import application.Menu;
+package com.challenge;
+
+import com.challenge.application.Menu;
 
 public class Main {
 

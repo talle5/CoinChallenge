@@ -1,6 +1,6 @@
-package application;
+package com.challenge.application;
 
-import services.Swapper;
+import com.challenge.services.Swapper;
 
 import java.util.Scanner;
 
