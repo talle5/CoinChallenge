@@ -33,7 +33,7 @@ public class Shell implements IConsoleApplication {
                         }
                         System.out.printf("%.2f\n", (value / moeda1) * moeda2);
                     }
-                    case "" -> {}
+                    case "" -> { continue;}
                     default -> throw new Exception("Comando invalido! Para ajuda digite help.");
                 }
             } catch (NumberFormatException e) {
