@@ -1,20 +1,28 @@
 package com.challenge.services;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.util.Map;
 
 public class CacheManager {
     private static Map<String, Double> cache;
-    private static final String KEY = "6fbf572aae07c153af99cb7c";
-    private static final File localCache = new File("data");
+    private static final String KEY;
+    private static final File localCache;
+    private static long nextUpdate;
+
+    static {
+        KEY = System.getenv("EXCHANGE_KEY");
+        if (KEY == null) {
+            System.out.println("variavel EXCHANGE_KEY não definida");
+            System.exit(1);
+        }
+        localCache = new File("data");
+    }
 
     public CacheManager() {
         if (cache == null) {
@@ -31,17 +39,25 @@ public class CacheManager {
             if (!localCache.exists()) {
                 writeCache();
             }
-            var json = JsonParser.parseReader(new FileReader(localCache)).getAsJsonObject();
-            var nextUpdate = json.get("time_next_update_unix").getAsInt();
-            if (System.currentTimeMillis() / 1000 >= nextUpdate) {
+            var json = getJson();
+            nextUpdate = json.get("time_next_update_unix").getAsInt();
+            if (isUpdated()) {
                 writeCache();
-                json = JsonParser.parseReader(new FileReader(localCache)).getAsJsonObject();
+                json = getJson();
             }
             var valores = json.get("conversion_rates");
             cache = (new Gson()).fromJson(valores, (new TypeToken<Map<String, Double>>(){}).getType());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public boolean isUpdated(){
+        return System.currentTimeMillis() / 1000 >= nextUpdate;
+    }
+
+    private JsonObject getJson() throws FileNotFoundException {
+        return JsonParser.parseReader(new FileReader(localCache)).getAsJsonObject();
     }
 
     private void writeCache() throws IOException {
